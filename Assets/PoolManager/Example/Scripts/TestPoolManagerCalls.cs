@@ -1,14 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class TestPoolManagerCalls : MonoBehaviour
+namespace Anderson.PoolManager.Test
 {
-    [SerializeField]
-    private GameObject[] m_Prefabs;
-
-    public void UsePoolObject(int id)
+    public class TestPoolManagerCalls : MonoBehaviour
     {
-        PoolManager.Instance.UseObjectFromPool(m_Prefabs[id], Random.insideUnitCircle * 5, Quaternion.identity);
+        [SerializeField]
+        private GameObject[] m_Prefabs;
+
+        public void UsePoolObject(int id)
+        {
+            PoolManager.Instance.UseObjectFromPool(m_Prefabs[id], Random.insideUnitCircle * 5, Quaternion.identity);
+        }
     }
 }

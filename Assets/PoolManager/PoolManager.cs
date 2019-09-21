@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace Anderson.PoolManager
+{
 public class PoolManager : Singleton<PoolManager>
 {
     [System.Serializable]
@@ -25,7 +27,6 @@ public class PoolManager : Singleton<PoolManager>
         CreatePools();
     }
 
-    //Create Pools
     private void CreatePools()
     {
         for (int i = 0; i < m_Pools.Count; i++)
@@ -46,7 +47,6 @@ public class PoolManager : Singleton<PoolManager>
         return a_Pool.m_Prefab != null;
     }
 
-    //Create Pool's Objects
     private void GrowPool(PoolStruct a_Pool)
     {
         for (int i = 0; i < a_Pool.m_Size; i++)
@@ -55,7 +55,6 @@ public class PoolManager : Singleton<PoolManager>
         }
     }
 
-    //Create Object for the pool and config
     private void CreatePooledObject(GameObject a_PoolPrefab)
     {
         GameObject pooledGameObject = Instantiate(a_PoolPrefab, transform);
@@ -75,7 +74,6 @@ public class PoolManager : Singleton<PoolManager>
         }
     }
 
-    //Use a Pooled Object from a specific pool
     public GameObject UseObjectFromPool(GameObject a_Prefab, Vector3 a_Position, Quaternion a_Rotation)
     {
         GameObject pooledObject = GetObjectFromPool(a_Prefab);
@@ -129,7 +127,6 @@ public class PoolManager : Singleton<PoolManager>
         return null;
     }
 
-    //Get a Pool with a prefab
     private PoolStruct GetPoolStruct(GameObject a_PoolPrefab)
     {
         for (int i = 0; i < m_Pools.Count; i++)
@@ -184,4 +181,6 @@ public class PoolManager : Singleton<PoolManager>
             }
         }
     }
+}
+
 }

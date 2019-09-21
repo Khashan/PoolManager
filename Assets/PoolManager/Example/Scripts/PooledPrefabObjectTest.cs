@@ -1,31 +1,30 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PooledPrefabObjectTest : PooledObject
+namespace Anderson.PoolManager.Test
 {
-    [SerializeField]
-    private bool m_AutoDisable = false;
-    [SerializeField]
-    private float m_LifeTime = -1f;
-
-    private float m_CurrentLifeTime = 0f;
-
-    private void OnEnable()
+    public class PooledPrefabObjectTest : PooledObject
     {
-        m_CurrentLifeTime = m_LifeTime;
-    }
+        [SerializeField]
+        private bool m_AutoDisable = false;
+        [SerializeField]
+        private float m_LifeTime = -1f;
 
-    private void Update()
-    {
-        if(m_AutoDisable)
+        private float m_CurrentLifeTime = 0f;
+
+        private void OnEnable()
         {
-            m_CurrentLifeTime -= Time.deltaTime;
-            if(m_CurrentLifeTime <= 0)
+            m_CurrentLifeTime = m_LifeTime;
+        }
+
+        private void Update()
+        {
+            if (m_AutoDisable)
             {
-                Destroy(gameObject); //Never use Destroy! Use SetActive(False), I'm using Destroy to add a safety on the code
-                //gameObject.SetActive(false);
+                m_CurrentLifeTime -= Time.deltaTime;
+                if (m_CurrentLifeTime <= 0)
+                {
+                    gameObject.SetActive(false);
+                }
             }
         }
     }
