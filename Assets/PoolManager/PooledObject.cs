@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Anderson.PoolManager
 {
@@ -15,6 +16,23 @@ namespace Anderson.PoolManager
         }
 
         private string m_StackTrace;
+        private bool m_SceneHasBeenUnloaded = false;
+        private void Awake()
+        {
+#if UNITY_EDITOR
+            SceneManager.sceneUnloaded += OnSceneUnloaded;
+#endif
+        }
+
+#if UNITY_EDITOR
+        private void OnSceneUnloaded(Scene scene)
+        {
+            if (scene == gameObject.scene)
+            {
+                m_SceneHasBeenUnloaded = true;
+            }
+        }
+#endif
 
         public virtual void InitPooledObject(GameObject a_PoolOwner)
         {
@@ -28,19 +46,25 @@ namespace Anderson.PoolManager
             m_StackTrace = StackTraceUtility.ExtractStackTrace();
 #endif
             PoolManager.Instance.ReturnedPooledObject(this, PoolOwner);
+
+
         }
 
         protected virtual void OnDestroy()
         {
 #if UNITY_EDITOR
-            Debug.LogError(GetDestroyErrorMessage());
+            if (!m_SceneHasBeenUnloaded)
+            {
+                Debug.LogError(GetDestroyErrorMessage());
+                SceneManager.sceneUnloaded -= OnSceneUnloaded;
+            }
 #endif
         }
 
 #if UNITY_EDITOR
         private string GetDestroyErrorMessage()
         {
-            string errorMessage = "PooledObject should've never been destroyed! \n{0}";
+            string errorMessage = "(Ignore it if you were stopping unity play)\nPooledObject should've never been destroyed! \n{0}";
 
             if (!m_DestroyErrorSourceOnly)
             {
