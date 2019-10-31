@@ -81,6 +81,12 @@ namespace Anderson.PoolManager
             }
         }
 
+        public T UseObjectFromPool<T>(GameObject a_Prefab, Vector3 a_Position, Quaternion a_Rotation)
+        {
+            GameObject pooledObject = UseObjectFromPool(a_Prefab, a_Position, a_Rotation);
+            return pooledObject.GetComponent<T>();
+        }
+
         public GameObject UseObjectFromPool(GameObject a_Prefab, Vector3 a_Position, Quaternion a_Rotation)
         {
             GameObject pooledObject = GetObjectFromPool(a_Prefab);
