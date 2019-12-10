@@ -1,7 +1,7 @@
 ﻿/*
 PoolManager
 Original Author: Simon Anderson
-https://bitbucket.org/Khashan/poolmanager/src/master/
+https://github.com/Khashan/PoolManager/tree/master
 
 License: MIT - do whatever you want.
 */
