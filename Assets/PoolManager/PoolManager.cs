@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿/*
+PoolManager
+Original Author: Simon Anderson
+https://bitbucket.org/Khashan/poolmanager/src/master/
+
+License: MIT - do whatever you want.
+*/
 using System.Collections.Generic;
 using UnityEngine;
 
