@@ -1,6 +1,7 @@
 # PoolManager
 Unity C# PoolManager system
 
+[Release](https://github.com/Khashan/PoolManager/releases)
 
 ## How it works
 
